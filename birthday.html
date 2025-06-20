@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Mom!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffd6d6 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s infinite;
+        }
+        
+        .birthday-person {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #4a4a4a;
+            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .cake-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 2rem auto;
+        }
+        
+        .cake {
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(to bottom, #f8d7da, #f5b5b5);
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cake:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, #fff5f5, #f8d7da);
+            bottom: -20px;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .candle {
+            width: 12px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffd166, #ff9f1c);
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+        
+        .flame {
+            width: 15px;
+            height: 30px;
+            background: linear-gradient(to bottom, #ffff00, #ff9500);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 1s infinite alternate;
+            box-shadow: 0 0 20px #ff9500, 0 0 40px #ff9500;
+        }
+        
+        .decoration {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff9ff3;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 159, 243, 0.7);
+        }
+        
+        .decoration:nth-child(1) {
+            top: 20px;
+            left: 30px;
+            background: #feca57;
+        }
+        
+        .decoration:nth-child(2) {
+            top: 10px;
+            right: 40px;
+            background: #ff6b6b;
+        }
+        
+        .decoration:nth-child(3) {
+            bottom: 30px;
+            left: 50px;
+            background: #48dbfb;
+        }
+        
+        .decoration:nth-child(4) {
+            bottom: 20px;
+            right: 60px;
+            background: #1dd1a1;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ff6b6b;
+            transform: rotate(45deg);
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.8;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ff6b6b;
+            border-radius: 50%;
+        }
+        
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: -15px;
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            top: 0;
+            z-index: 9999;
+            animation: confetti-fall 5s linear infinite;
+        }
+        
+        .gift-box {
+            width: 150px;
+            height: 100px;
+            background: linear-gradient(to bottom, #ff6b6b, #ff8e8e);
+            margin: 2rem auto;
+            position: relative;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .gift-box:hover {
+            transform: scale(1.05);
+        }
+        
+        .gift-box:before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .gift-box:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: #ff4757;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .gift-box .ribbon {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff4757;
+            border-radius: 50%;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 5px rgba(255, 71, 87, 0.3);
+        }
+        
+        .hidden-message {
+            display: none;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+            border: 10px solid white;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background: #f8d7da;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .photo-frame:before {
+            content: "❤ Mom ❤";
+            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes flicker {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+            50% { transform: translateX(-50%) scale(0.9); opacity: 0.8; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .birthday-person {
+                font-size: 2rem;
+            }
+            
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts">
+        <div class="heart" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+        <div class="heart" style="left: 25%; top: 30%; animation-delay: 1s;"></div>
+        <div class="heart" style="left: 70%; top: 10%; animation-delay: 2s;"></div>
+        <div class="heart" style="left: 80%; top: 25%; animation-delay: 3s;"></div>
+        <div class="heart" style="left: 40%; top: 10%; animation-delay: 4s;"></div>
+    </div>
+    
+    <div class="container">
+        <h1>Happy Birthday!</h1>
+        <div class="birthday-person">To our Wonderful Mother</div>
+        
+        <div class="message">
+            <p>Dear Mom,</p>
+            <p>On your special day, we want you to know how much you mean to us. You're the heart of our family, the glue that holds us all together, and the light that guides us through life.</p>
+            <p>  May this birthday bring you as much happiness as you've brought to our lives!</p>
+            <p>With all our love,</p>
+            <p>George,Trevor,Shiko ❤</p>
+        </div>
+        
+        <div class="photo-frame"></div>
+        
+        <div class="cake-container">
+            <div class="decoration"></div>
+            <div class="decoration"></div>
+            <div class="decoration"></div>
+            <div class="decoration"></div>
+            <div class="cake">
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="gift-box" id="giftBox">
+            <div class="ribbon"></div>
+        </div>
+        
+        <div class="hidden-message" id="hiddenMessage">
+            <h3>Here's a special gift for you, Mom!</h3>
+            <p> Thank you for your endless love, support, and kindness. May your birthday be filled with joy, laughter, and all your heart desires. </p>
+            <p>❤ We love you more than words can express ❤</p>
+        </div>
+    </div>
+    
+    <script>
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#48dbfb', '#feca57', '#1dd1a1', '#ff9ff3'];
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            
+            // Random properties
+            const size = Math.random() * 10 + 5;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const left = Math.random() * window.innerWidth;
+            const animationDuration = Math.random() * 3 + 2;
+            
+            confetti.style.width = `${size}px`;
+            confetti.style.height = `${size}px`;
+            confetti.style.backgroundColor = color;
+            confetti.style.left = `${left}px`;
+            confetti.style.animationDuration = `${animationDuration}s`;
+            
+            document.body.appendChild(confetti);
+            
+            // Remove confetti after animation
+            setTimeout(() => {
+                confetti.remove();
+            }, animationDuration * 1000);
+        }
+        
+        // Create confetti periodically
+        setInterval(createConfetti, 150);
+        
+        // Gift box interaction
+        const giftBox = document.getElementById('giftBox');
+        const hiddenMessage = document.getElementById('hiddenMessage');
+        
+        giftBox.addEventListener('click', () => {
+            hiddenMessage.style.display = 'block';
+            
+            // Create a burst of confetti when gift is opened
+            for (let i = 0; i < 50; i++) {
+                setTimeout(createConfetti, i * 50);
+            }
+            
+            // Animate the gift box
+            giftBox.style.transform = 'scale(0.9) rotate(5deg)';
+            setTimeout(() => {
+                giftBox.style.transform = 'scale(1) rotate(0)';
+            }, 300);
+        });
+        
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            
+            const size = Math.random() * 30 + 20;
+            const left = Math.random() * window.innerWidth;
+            const animationDuration = Math.random() * 6 + 4;
+            const delay = Math.random() * 5;
+            
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            heart.style.left = `${left}px`;
+            heart.style.top = `${window.innerHeight + 50}px`;
+            heart.style.animationDuration = `${animationDuration}s`;
+            heart.style.animationDelay = `${delay}s`;
+            
+            document.querySelector('.hearts').appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                heart.remove();
+            }, (animationDuration + delay) * 1000);
+        }
+        
+        // Create hearts periodically
+        setInterval(createHeart, 1000);
+    </script>
+    <audio id="birthdayaudio" autoplay loop>
+        <source src="audio/happy-birthday-254480.mp3" type="audio/mp3">
+    </audio>
+</body>
+</html>
